@@ -44,14 +44,12 @@ function comparePre(va, vb) {
                 return 1;
             }
 
-            if (typeof va.pre[i] === typeof vb.pre[i]) {
-                if (va.pre[i] < vb.pre[i]) {
-                    return -1;
-                }
+            if (va.pre[i] < vb.pre[i]) {
+                return -1;
+            }
 
-                if (va.pre[i] > vb.pre[i]) {
-                    return 1;
-                }
+            if (va.pre[i] > vb.pre[i]) {
+                return 1;
             }
         }
     }
