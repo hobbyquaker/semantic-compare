@@ -1,0 +1,40 @@
+{
+  "name": "semantic-compare",
+  "version": "1.0.0",
+  "description": "Compare version strings according to Semantic Versioning 2.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": ">= 8"
+  },
+  "scripts": {
+    "test": "xo && mocha test/**/*.js",
+    "lint": "xo",
+    "lintfix": "xo --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hobbyquaker/semantic-compare.git"
+  },
+  "keywords": [
+    "semver",
+    "semantic",
+    "versioning",
+    "compare",
+    "sort",
+    "version"
+  ],
+  "author": "Sebastian Raff <hobbyquaker@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hobbyquaker/semantic-compare/issues"
+  },
+  "homepage": "https://github.com/hobbyquaker/semantic-compare#readme",
+  "dependencies": {
+    "mocha": "^6.2.1",
+    "should": "^13.2.3",
+    "xo": "^0.25.3"
+  },
+  "xo": {
+    "space": 4
+  }
+}
