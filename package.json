@@ -48,7 +48,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm testonly"
+      "pre-push": "npm run testonly"
     }
   }
 }
