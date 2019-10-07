@@ -4,51 +4,51 @@ function split(version) {
     return {core, pre, build};
 }
 
-function compareCore(va, vb) {
+function compareCore(a, b) {
     for (let i = 0; i < 3; i++) {
-        if (va.core[i] < vb.core[i]) {
+        if (a[i] < b[i]) {
             return -1;
         }
 
-        if (va.core[i] > vb.core[i]) {
+        if (a[i] > b[i]) {
             return 1;
         }
     }
 }
 
-function comparePre(va, vb) {
-    if (va.pre && !vb.pre) {
+function comparePre(a, b) {
+    if (a && !b) {
         return -1;
     }
 
-    if (!va.pre && vb.pre) {
+    if (!a && b) {
         return 1;
     }
 
-    if (va.pre && vb.pre) {
-        const len = va.pre.length > vb.pre.length ? va.pre.length : vb.pre.length;
+    if (a && b) {
+        const len = a.length > b.length ? a.length : b.length;
         for (let i = 0; i < len; i++) {
-            if (typeof va.pre[i] === 'undefined' && typeof vb.pre[i] !== 'undefined') {
+            if (typeof a[i] === 'undefined' && typeof b[i] !== 'undefined') {
                 return -1;
             }
 
-            if (typeof va.pre[i] !== 'undefined' && typeof vb.pre[i] === 'undefined') {
+            if (typeof a[i] !== 'undefined' && typeof b[i] === 'undefined') {
                 return 1;
             }
 
-            if (typeof va.pre[i] === 'number' && typeof vb.pre[i] === 'string') {
+            if (typeof a[i] === 'number' && typeof b[i] === 'string') {
                 return -1;
             }
 
-            if (typeof va.pre[i] === 'string' && typeof vb.pre[i] === 'number') {
+            if (typeof a[i] === 'string' && typeof b[i] === 'number') {
                 return 1;
             }
 
-            if (va.pre[i] < vb.pre[i]) {
+            if (a[i] < b[i]) {
                 return -1;
             }
 
-            if (va.pre[i] > vb.pre[i]) {
+            if (a[i] > b[i]) {
                 return 1;
             }
         }
@@ -59,13 +59,13 @@ module.exports = (a, b) => {
     const va = split(a);
     const vb = split(b);
 
-    const core = compareCore(va, vb);
+    const core = compareCore(va.core, vb.core);
 
     if (core) {
         return core;
     }
 
-    const pre = comparePre(va, vb);
+    const pre = comparePre(va.pre, vb.pre);
 
     if (pre) {
         return pre;
