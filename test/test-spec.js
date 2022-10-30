@@ -325,7 +325,7 @@ describe('sorting core-pre', () => {
             '1.0.0-rc.1',
             '1.0.0-beta.2',
             '1.0.0-alpha',
-            '1.0.0-beta.11'
+            '1.0.0-beta.11',
         ].sort(semverCompare)) === '["1.0.0-alpha","1.0.0-alpha.1","1.0.0-alpha.beta","1.0.0-beta","1.0.0-beta.2","1.0.0-beta.11","1.0.0-rc.1","1.0.0"]');
 
         assert(JSON.stringify([
@@ -344,7 +344,19 @@ describe('sorting core-pre', () => {
             '2.0.0-beta.1',
             '2.0.0-rc.1',
             '2.0.0-beta.2',
-            '2.0.0-rc'
+            '2.0.0-rc',
         ].sort(semverCompare)) === '["0.0.1","0.1.0","1.0.0-beta","1.0.0-beta.1","1.0.0-rc.1","1.0.0","2.0.0-alpha","2.0.0-alpha.1","2.0.0-alpha.2","2.0.0-beta","2.0.0-beta.1","2.0.0-beta.2","2.0.0-rc","2.0.0-rc.1","2.0.0-rc.2","2.0.0"]');
+    });
+});
+
+describe('invalid input', () => {
+    it('should not throw', () => {
+        assert(semverCompare('1.0.0', null) === 1);
+        assert(semverCompare('2.0.0', 1) === 1);
+        assert(semverCompare('2.0.0', 1.9) === 1);
+        assert(semverCompare(null, null) === 0);
+        assert(semverCompare(null, '1.0.0') === -1);
+        assert(semverCompare('2.0.0', 3) === -1);
+        assert(semverCompare(3.2, '3.3.0') === -1);
     });
 });

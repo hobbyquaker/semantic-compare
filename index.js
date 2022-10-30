@@ -1,6 +1,6 @@
 function split(version) {
     const [corepre, build] = version.split('+');
-    const [core, pre] = corepre.split('-').map(x => String(x).split('.').map(y => isNaN(y) ? y : parseInt(y, 10)));
+    const [core, pre] = corepre.split('-').map(x => String(x).split('.').map(y => isNaN(y) ? y : Number.parseInt(y, 10)));
     return {core, pre, build};
 }
 
@@ -26,8 +26,8 @@ function comparePre(a, b) {
     }
 
     if (a && b) {
-        const len = a.length > b.length ? a.length : b.length;
-        for (let i = 0; i < len; i++) {
+        const length = a.length > b.length ? a.length : b.length;
+        for (let i = 0; i < length; i++) {
             if (typeof a[i] === 'undefined' && typeof b[i] !== 'undefined') {
                 return -1;
             }
@@ -56,6 +56,26 @@ function comparePre(a, b) {
 }
 
 module.exports = (a, b) => {
+    if (typeof a === 'number') {
+        a = String(a);
+    }
+
+    if (typeof b === 'number') {
+        b = String(b);
+    }
+
+    if (typeof a !== 'string' && typeof b !== 'string') {
+        return 0;
+    }
+
+    if (typeof a !== 'string') {
+        return -1;
+    }
+
+    if (typeof b !== 'string') {
+        return 1;
+    }
+
     const va = split(a);
     const vb = split(b);
 
